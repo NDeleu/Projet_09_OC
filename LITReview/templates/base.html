@@ -1,15 +1,51 @@
-<!DOCTYPE html>
-<html lang="fr">
+{% load static %}
+<html lang="fr" xmlns="http://www.w3.org/1999/html">
     <head>
         <title>LITReview</title>
+        <link rel="stylesheet" href="{% static 'style.css' %}">
     </head>
     <body>
-        <h1>LITReview</h1>
-        {% block content %}{% endblock content %}
-        {% if user.is_authenticated %}
-        <p>Vous êtes connecté en tant que {{ request.user }}.
-            <a href="{% url 'password_change' %}">Changer le mot de passe</a>
-            <a href="{% url 'logout' %}">Se déconnecter</a></p>
-        {% endif %}
+        <div class="container-all">
+            <div class="bartitle">
+                <h1>LITReview</h1>
+            </div>
+            <div class="barmenu">
+                {% if user.is_authenticated %}
+                    {% if user.profile_photo %}
+                        <img class="pic_profile" src="{{ user.profile_photo.url }}">
+                    {% else %}
+                        <img class="pic_profile" src="{% static 'images/default_profile.png' %}">
+                    {% endif %}
+                    <p class="name_profile">{{ request.user }}</p>
+                    <nav>
+                        <ul>
+                            <li class="menu"><a href="#">Mon flux</a>
+                                <ul class="sous-menu">
+                                    <li><a id="nav-homepage" href="{% url 'home' %}">Accueil</a></li>
+                                    <li><a id="nav-abonnements" href="#">Abonnements</a></li>
+                                </ul>
+                            </li>
+                            <li class="menu"><a href="#">Mes posts</a>
+                                <ul class="sous-menu">
+                                    <li><a id="nav-create-ticket" href="#">Créer un ticket</a></li>
+                                    <li><a id="nav-create-critique" href="#">Créer une critique</a></li>
+                                    <li><a id="nav-edit-posts" href="#">Éditer mes posts</a></li>
+                                </ul>
+                            </li>
+                            <li class="menu"><a href="#">Mon profile</a>
+                                <ul class="sous-menu">
+                                    <li><a id="nav-edit-picture-profile" href="{% url 'upload_profile_photo' %}">Changer de photo de profile</a></li>
+                                    <li><a id="nav-edit-password" href="{% url 'password_change' %}">Changer de mot de passe</a></li>
+                                </ul>
+                            </li>
+                            <li class="menu logout"><a href="{% url 'logout' %}">Déconnection</a></li>
+                        </ul>
+                    </nav>
+                {% endif %}
+            </div>
+            <div class="main">
+                {% block content %}{% endblock content %}
+            </div>
+        </div>
     </body>
 </html>
