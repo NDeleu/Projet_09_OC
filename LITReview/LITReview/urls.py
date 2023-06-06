@@ -42,6 +42,8 @@ urlpatterns = [
     path('signup/', authentication.views.signup_page, name='signup'),
     path('profile-photo/upload', authentication.views.upload_profile_photo,
          name='upload_profile_photo'),
+    path('ticket/create/', rthome.views.create_ticket, name='create_ticket'),
+    path('post-edit/', rthome.views.post_edit, name='post_edit'),
 ]
 
 if settings.DEBUG:
