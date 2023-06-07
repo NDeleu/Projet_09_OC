@@ -44,6 +44,10 @@ urlpatterns = [
          name='upload_profile_photo'),
     path('ticket/create/', rthome.views.create_ticket, name='create_ticket'),
     path('post-edit/', rthome.views.post_edit, name='post_edit'),
+    path('ticket/<int:ticket_id>/edit', rthome.views.edit_ticket,
+         name='edit_ticket'),
+    path('ticket/<int:ticket_id>/delete', rthome.views.delete_ticket,
+         name='delete_ticket'),
 ]
 
 if settings.DEBUG:

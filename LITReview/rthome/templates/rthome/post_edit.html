@@ -13,24 +13,12 @@
                 {% else %}
                     <img src="{% static 'images/default_profile.png' %}">
                 {% endif %}
-                <p class="add_review"><a href="#">Ajouter une critique</a></p>
+                <p class="add_review">
+                    <a class="edit_ticket" href="{% url 'edit_ticket' ticket.id %}">Modifier</a>
+                    <a class="delete_ticket" href="{% url 'delete_ticket' ticket.id %}">Supprimer</a>
+                </p>
             </div>
         {% endfor %}
     </div>
-    <span class="pagin">
-        {% if page_obj.has_previous %}
-            <a href="?page=1">« première</a>
-            <a href="?page={{ page_obj.previous_page_number }}">précédente</a>
-        {% endif %}
-
-        <span>
-            Page {{ page_obj.number }} sur {{ page_obj.paginator.num_pages }}.
-
-        </span>
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">suivante</a>
-
-            <a href="?page={{ page_obj.paginator.num_pages }}">dernière »</a>
-        {% endif %}
-    </span>
-{% endblock %}
+    {% include 'partials/page_navigator.html' %}
+{% endblock content %}

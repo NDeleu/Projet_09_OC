@@ -224,6 +224,14 @@ nav > ul li:hover .sous-menu{
     text-align: end;
 }
 
+.ticket .edit_ticket{
+    text-align: start;
+}
+
+.ticket .delete_ticket{
+    text-align: end;
+}
+
 .pagin{
     margin-left: 40%;
 }

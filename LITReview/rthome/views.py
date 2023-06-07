@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from itertools import chain
@@ -48,3 +48,29 @@ def create_ticket(request):
             ticket.save()
             return redirect('home')
     return render(request, 'rthome/create_ticket.html', context={'form': form})
+
+
+@login_required
+def edit_ticket(request, ticket_id):
+    ticket = get_object_or_404(models.Ticket, id=ticket_id)
+    form = forms.TicketForm(instance=ticket)
+    if request.method == 'POST':
+        form = forms.TicketForm(request.POST, request.FILES, instance=ticket)
+        if form.is_valid():
+            ticket_save = form.save(commit=False)
+            ticket_save.user = request.user
+            ticket_save.save()
+            return redirect('post_edit')
+    return render(request, 'rthome/edit_ticket.html', context={'form': form})
+
+
+@login_required
+def delete_ticket(request, ticket_id):
+    ticket = get_object_or_404(models.Ticket, id=ticket_id)
+
+    if request.method == 'POST':
+        ticket.delete()
+        return redirect('post_edit')
+
+    return render(
+        request, 'rthome/delete_ticket.html', context={'ticket': ticket})

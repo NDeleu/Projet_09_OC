@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2>Suppression du ticket sur {{ ticket.title }} - {{ ticket.author }}</h2>
+
+    <p>Êtes-vous sûr de vouloir supprimer ce ticket ?</p>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" >Oui</button>
+    </form>
+
+    <p><a href="{% url 'post_edit' %}">Non</a></p>
+{% endblock content %}
