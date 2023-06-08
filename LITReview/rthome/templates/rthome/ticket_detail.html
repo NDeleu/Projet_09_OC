@@ -14,6 +14,7 @@
     {% else %}
         <img src="{% static 'images/default_profile.png' %}">
     {% endif %}
+    <p><a href="{% url 'create_review' ticket.id %}">Ajouter une critique</a></p>
     {% if ticket.user == request.user %}
         <p class="add_review">
             <a class="edit_ticket" href="{% url 'edit_ticket' ticket.id %}">Modifier</a>
