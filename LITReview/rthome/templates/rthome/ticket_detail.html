@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load rthome_extras %}
+{% load static %}
+    <h2>Ticket sur {{ ticket.title }} - {{ ticket.author }}</h2>
+
+    <p>Titre : {{ ticket.title }}</p>
+    <p>Auteur : {{ ticket.author }}</p>
+    <p>Ticket édité par {% user_pronoun_choice ticket.user %}</p>
+    <p>Le : {{ ticket.time_created }}</p>
+    <p>Description : {{ ticket.description }}</p>
+     {% if ticket.image %}
+        <img src="{{ ticket.image.url }}">
+    {% else %}
+        <img src="{% static 'images/default_profile.png' %}">
+    {% endif %}
+    {% if ticket.user == request.user %}
+        <p class="add_review">
+            <a class="edit_ticket" href="{% url 'edit_ticket' ticket.id %}">Modifier</a>
+            <a class="delete_ticket" href="{% url 'delete_ticket' ticket.id %}">Supprimer</a>
+        </p>
+    {% endif %}
+    <p><a href="{% url 'home' %}">Retour au flux</a></p>
+
+{% endblock content %}

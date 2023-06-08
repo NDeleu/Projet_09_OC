@@ -64,6 +64,10 @@ urlpatterns = [
          rthome.views.edit_review, name='edit_review'),
     path('ticket/<int:ticket_id>/review/<int:review_id>/delete/',
          rthome.views.delete_review, name='delete_review'),
+    path('ticket/<int:ticket_id>/detail/',
+         rthome.views.ticket_detail, name='ticket_detail'),
+    path('ticket/<int:ticket_id>/review/<int:review_id>/detail/',
+         rthome.views.review_detail, name='review_detail'),
 ]
 
 if settings.DEBUG:

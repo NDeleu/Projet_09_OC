@@ -1,7 +1,8 @@
+{% load rthome_extras %}
 {% load static %}
 <div class="ticket">
     <p class="date">édité le {{ ticket.time_created }}</p>
-    <p class="user_ticket">{{ ticket.user }} a demandé une critique</p>
+    <p class="user_ticket"><a href="{% url 'ticket_detail' ticket.id %}">Critique demandée par {% user_pronoun_choice ticket.user %}</a></p>
     <p>{{ ticket.title }} - {{ ticket.author }}</p>
     {% if ticket.image %}
         <img src="{{ ticket.image.url }}">

@@ -346,3 +346,7 @@ nav > ul li:hover .sous-menu{
     width: 60%;
     text-align: center;
 }
+
+.user_review a, .user_ticket a{
+    font-size: 20px;
+}

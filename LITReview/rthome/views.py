@@ -204,3 +204,20 @@ def error_change_review(request, ticket_id, review_id):
     return render(
         request, 'rthome/error_change_ticket.html',
         context={'ticket': ticket, 'review': review})
+
+
+@login_required
+def ticket_detail(request, ticket_id):
+    ticket = get_object_or_404(models.Ticket, id=ticket_id)
+    return render(
+        request, 'rthome/ticket_detail.html',
+        context={'ticket': ticket})
+
+
+@login_required
+def review_detail(request, ticket_id, review_id):
+    ticket = get_object_or_404(models.Ticket, id=ticket_id)
+    review = get_object_or_404(models.Review, id=review_id)
+    return render(
+        request, 'rthome/review_detail.html',
+        context={'ticket': ticket, 'review': review})
