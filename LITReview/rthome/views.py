@@ -114,16 +114,17 @@ def create_ticket_and_review(request):
 def edit_ticket(request, ticket_id):
     ticket = get_object_or_404(models.Ticket, id=ticket_id)
     form = forms.TicketForm(instance=ticket)
-    if ticket.user != request.user:
-        return redirect('error_change_ticket', ticket.id)
-    else:
-        if request.method == 'POST':
-            form = forms.TicketForm(request.POST, request.FILES, instance=ticket)
-            if form.is_valid():
-                ticket_save = form.save(commit=False)
-                ticket_save.user = request.user
-                ticket_save.save()
-                return redirect('post_edit')
+    if ticket:
+        if ticket.user != request.user:
+            return redirect('error_change_ticket', ticket.id)
+        else:
+            if request.method == 'POST':
+                form = forms.TicketForm(request.POST, request.FILES, instance=ticket)
+                if form.is_valid():
+                    ticket_save = form.save(commit=False)
+                    ticket_save.user = request.user
+                    ticket_save.save()
+                    return redirect('post_edit')
     return render(
         request, 'rthome/edit_ticket.html',
         context={'ticket': ticket, 'form': form})
@@ -133,13 +134,14 @@ def edit_ticket(request, ticket_id):
 def delete_ticket(request, ticket_id):
     ticket = get_object_or_404(models.Ticket, id=ticket_id)
 
-    if ticket.user != request.user:
-        return redirect('error_change_ticket', ticket.id)
-    else:
+    if ticket:
+        if ticket.user != request.user:
+            return redirect('error_change_ticket', ticket.id)
+        else:
 
-        if request.method == 'POST':
-            ticket.delete()
-            return redirect('post_edit')
+            if request.method == 'POST':
+                ticket.delete()
+                return redirect('post_edit')
 
     return render(
         request, 'rthome/delete_ticket.html', context={'ticket': ticket})
@@ -151,6 +153,48 @@ def error_change_ticket(request, ticket_id):
     return render(
         request, 'rthome/error_change_ticket.html',
         context={'ticket': ticket})
+
+
+@login_required
+def edit_review(request, ticket_id, review_id):
+    review = get_object_or_404(models.Review, id=review_id)
+    ticket = get_object_or_404(models.Ticket, id=ticket_id)
+    form = forms.ReviewForm(instance=review)
+    if review:
+        if review.user != request.user:
+            return redirect('error_change_review', ticket.id, review.id)
+        else:
+
+            if request.method == 'POST':
+                form = forms.ReviewForm(request.POST, instance=review)
+                if form.is_valid():
+                    review = form.save(commit=False)
+                    review.user = request.user
+                    review.ticket = ticket
+                    review.save()
+                    return redirect('post_edit')
+    return render(
+        request, 'rthome/create_review.html',
+        context={'ticket': ticket, 'review': review, 'form': form})
+
+
+@login_required
+def delete_review(request, ticket_id, review_id):
+    review = get_object_or_404(models.Review, id=review_id)
+    ticket = get_object_or_404(models.Ticket, id=ticket_id)
+
+    if review:
+        if review.user != request.user:
+            return redirect('error_change_review', ticket.id, review.id)
+        else:
+
+            if request.method == 'POST':
+                review.delete()
+                return redirect('post_edit')
+
+    return render(
+        request, 'rthome/delete_review.html',
+        context={'ticket': ticket, 'review': review})
 
 
 @login_required

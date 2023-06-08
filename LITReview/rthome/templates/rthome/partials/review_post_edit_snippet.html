@@ -25,4 +25,8 @@
             <img src="{% static 'images/default_profile.png' %}">
         {% endif %}
     </div>
+    <p class="add_review">
+        <a class="edit_ticket" href="{% url 'edit_review' review.ticket.id review.id %}">Modifier</a>
+        <a class="delete_ticket" href="{% url 'delete_review' review.ticket.id review.id %}">Supprimer</a>
+    </p>
 </div>

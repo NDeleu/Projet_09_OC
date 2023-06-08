@@ -57,10 +57,13 @@ urlpatterns = [
     path('ticket/<int:ticket_id>/error_change_ticket/',
          rthome.views.error_change_ticket,
          name='error_change_ticket'),
-    path('ticket/<int:ticket_id>/review/<int:review_id>',
+    path('ticket/<int:ticket_id>/review/<int:review_id>/error_change_review',
          rthome.views.error_change_review,
          name='error_change_review'),
-    #path('ticket/<int:ticket_id>/review/<int:review_id>/edit'...
+    path('ticket/<int:ticket_id>/review/<int:review_id>/edit/',
+         rthome.views.edit_review, name='edit_review'),
+    path('ticket/<int:ticket_id>/review/<int:review_id>/delete/',
+         rthome.views.delete_review, name='delete_review'),
 ]
 
 if settings.DEBUG:
