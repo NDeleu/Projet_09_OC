@@ -2,25 +2,31 @@
 {% block content %}
 {% load rthome_extras %}
 {% load static %}
-    <h2>Ticket sur {{ ticket.title }} - {{ ticket.author }}</h2>
+    <div class="ticket_detail_container">
+        <h3 class="tdet_hautp">Ticket sur {{ ticket.title }} - {{ ticket.author }}</h3>
 
-    <p>Titre : {{ ticket.title }}</p>
-    <p>Auteur : {{ ticket.author }}</p>
-    <p>Ticket édité par {% user_pronoun_choice ticket.user %}</p>
-    <p>Le : {{ ticket.time_created }}</p>
-    <p>Description : {{ ticket.description }}</p>
-     {% if ticket.image %}
-        <img src="{{ ticket.image.url }}">
-    {% else %}
-        <img src="{% static 'images/default_profile.png' %}">
-    {% endif %}
-    <p><a href="{% url 'create_review' ticket.id %}">Ajouter une critique</a></p>
-    {% if ticket.user == request.user %}
-        <p class="add_review">
-            <a class="edit_ticket" href="{% url 'edit_ticket' ticket.id %}">Modifier</a>
-            <a class="delete_ticket" href="{% url 'delete_ticket' ticket.id %}">Supprimer</a>
-        </p>
-    {% endif %}
-    <p><a href="{% url 'home' %}">Retour au flux</a></p>
+        <p class="tdet_titre">Titre : {{ ticket.title }}</p>
+        <p class="tdet_auteur">Auteur : {{ ticket.author }}</p>
+        <p class="tdet_user">Ticket édité par {% user_pronoun_choice ticket.user %}</p>
+        <p class="tdet_date">Le : {{ ticket.time_created }}</p>
+        <p class="tdet_describe">Description : {{ ticket.description }}</p>
+        <div class="tdet_image">
+             {% if ticket.image %}
+                <img src="{{ ticket.image.url }}">
+            {% else %}
+                <img src="{% static 'images/default_profile.png' %}">
+            {% endif %}
+        </div>
+        <p class="tdet_add"><a href="{% url 'create_review' ticket.id %}">Ajouter une critique</a></p>
+        <div class="tdet_update">
+            {% if ticket.user == request.user %}
+                <p>
+                    <a class="edit_ticket" href="{% url 'edit_ticket' ticket.id %}">Modifier</a>
+                    <a class="delete_ticket" href="{% url 'delete_ticket' ticket.id %}">Supprimer</a>
+                </p>
+            {% endif %}
+        </div>
+        <p class="tdet_home"><a href="{% url 'home' %}">Retour au flux</a></p>
+    </div>
 
 {% endblock content %}

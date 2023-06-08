@@ -350,3 +350,148 @@ nav > ul li:hover .sous-menu{
 .user_review a, .user_ticket a{
     font-size: 20px;
 }
+
+.ticket_detail_container{
+    display: grid;
+    width: 100%;
+    height: 60%;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
+    overflow: hidden;
+    grid-template-areas:    'hautp hautp hautp'
+                            'titre . user'
+                            'auteur . date'
+                            'image describe describe'
+                            'image describe describe'
+                            '. . .'
+                            'add update home';
+}
+
+.ticket_detail_container .tdet_hautp{
+    grid-area: hautp;
+}
+
+.ticket_detail_container .tdet_titre{
+    grid-area: titre;
+}
+
+.ticket_detail_container .tdet_user{
+    grid-area: user;
+}
+
+.ticket_detail_container .tdet_auteur{
+    grid-area: auteur;
+}
+
+.ticket_detail_container .tdet_date{
+    grid-area: date;
+}
+
+.ticket_detail_container .tdet_image{
+    grid-area: image;
+}
+
+.ticket_detail_container .tdet_image img{
+    height: 140px;
+    width: 140px;
+    margin: 1%;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+}
+
+.ticket_detail_container .tdet_describe{
+    grid-area: describe;
+}
+
+.ticket_detail_container .tdet_add{
+    grid-area: add;
+}
+
+.ticket_detail_container .tdet_update{
+    grid-area: update;
+}
+
+.ticket_detail_container .tdet_home{
+    grid-area: home;
+}
+
+.review_detail_container{
+    display: grid;
+    width: 100%;
+    height: 60%;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
+    overflow: hidden;
+    grid-template-areas:    'hautp hautp hautp'
+                            'headline . user'
+                            'rating . date'
+                            '. body body'
+                            'ticket body body'
+                            '. . .'
+                            '. update home';
+}
+
+.review_detail_container .rdet_hautp{
+    grid-area: hautp;
+}
+
+.review_detail_container .rdet_headline{
+    grid-area: headline;
+}
+
+.review_detail_container .rdet_user{
+    grid-area: user;
+}
+
+.review_detail_container .rdet_rating{
+    grid-area: rating;
+}
+
+.review_detail_container .rdet_date{
+    grid-area: date;
+}
+
+.review_detail_container .rdet_ticket_container{
+    grid-area: ticket;
+    margin: 2%;
+    border: 2px solid var(--border-color);
+    border-radius: 50px;
+    box-shadow: 0 0 4px var(--main-bg-color);
+    padding: 10px;
+}
+
+.review_detail_container .rdet_ticket_container .rdet_ticket_user a{
+    font-size: 16px;
+}
+
+.review_detail_container .rdet_ticket_container .rdet_ticket_title{
+    font-size: 14px;
+}
+
+.review_detail_container .rdet_ticket_container .rdet_ticket_image{
+    text-align: center;
+}
+
+.review_detail_container .rdet_ticket_container .rdet_ticket_image img{
+    height: 75px;
+    width: 75px;
+    margin: 1%;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+}
+
+.review_detail_container .rdet_ticket{
+    grid-area: ticket;
+}
+
+.review_detail_container .rdet_body{
+    grid-area: body;
+}
+
+.review_detail_container .rdet_update{
+    grid-area: update;
+}
+
+.review_detail_container .rdet_home{
+    grid-area: home;
+}

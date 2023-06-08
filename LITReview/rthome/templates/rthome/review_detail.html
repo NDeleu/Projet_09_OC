@@ -2,40 +2,48 @@
 {% block content %}
 {% load rthome_extras %}
 {% load static %}
-    <h2>Critique concernant le ticket sur {{ ticket.title }} - {{ ticket.author }}</h2>
+    <div class="review_detail_container">
+        <h3 class="rdet_hautp">Critique concernant le ticket sur {{ ticket.title }} - {{ ticket.author }}</h3>
 
-    <p>Epingle : {{ review.headline }}</p>
-    {% if review.rating == 1 %}
-        <p class="rating">★☆☆☆☆</p>
-    {% elif review.rating == 2 %}
-        <p class="rating">★★☆☆☆</p>
-    {% elif review.rating == 3 %}
-        <p class="rating">★★★☆☆</p>
-    {% elif review.rating == 4 %}
-        <p class="rating">★★★★☆</p>
-    {% elif review.rating == 5 %}
-        <p class="rating">★★★★★</p>
-    {% else %}
-        <p class="rating">☆☆☆☆☆</p>
-    {% endif %}
-    <p>Critique éditée par {% user_pronoun_choice review.user %}</p>
-    <p>Le : {{ review.time_created }}</p>
-    <p>Commentaire : {{ review.body }}</p>
-    <div class="ticket_for_review">
-        <p class="user_ticket"><a href="{% url 'ticket_detail' review.ticket.id %}">Critique demandée par {% user_pronoun_choice review.ticket.user %}</a></p>
-        <p>{{ review.ticket.title }} - {{ review.ticket.author }}</p>
-        {% if review.ticket.image %}
-            <img src="{{ review.ticket.image.url }}">
-        {% else %}
-            <img src="{% static 'images/default_profile.png' %}">
-        {% endif %}
+        <p class="rdet_headline">Epingle : {{ review.headline }}</p>
+        <div class="rdet_rating">
+            {% if review.rating == 1 %}
+                <p class="rating">★☆☆☆☆</p>
+            {% elif review.rating == 2 %}
+                <p class="rating">★★☆☆☆</p>
+            {% elif review.rating == 3 %}
+                <p class="rating">★★★☆☆</p>
+            {% elif review.rating == 4 %}
+                <p class="rating">★★★★☆</p>
+            {% elif review.rating == 5 %}
+                <p class="rating">★★★★★</p>
+            {% else %}
+                <p class="rating">☆☆☆☆☆</p>
+            {% endif %}
+        </div>
+        <p class="rdet_user">Critique éditée par {% user_pronoun_choice review.user %}</p>
+        <p class="rdet_date">Le : {{ review.time_created }}</p>
+        <p class="rdet_body">Commentaire : {{ review.body }}</p>
+        <div class="rdet_ticket_container">
+            <p class="rdet_ticket_user"><a href="{% url 'ticket_detail' review.ticket.id %}">Critique demandée par {% user_pronoun_choice review.ticket.user %}</a></p>
+            <p class="rdet_ticket_title">{{ review.ticket.title }} - {{ review.ticket.author }}</p>
+            <div class="rdet_ticket_image">
+                {% if review.ticket.image %}
+                    <img src="{{ review.ticket.image.url }}">
+                {% else %}
+                    <img src="{% static 'images/default_profile.png' %}">
+                {% endif %}
+            </div>
+        </div>
+        <div class="rdet_update">
+            {% if review.user == request.user %}
+                <p>
+                    <a class="edit_ticket" href="{% url 'edit_review' review.ticket.id review.id %}">Modifier</a>
+                    <a class="delete_ticket" href="{% url 'delete_review' review.ticket.id review.id %}">Supprimer</a>
+                </p>
+            {% endif %}
+        </div>
+        <p class="rdet_home"><a href="{% url 'home' %}">Retour au flux</a></p>
     </div>
-    {% if review.user == request.user %}
-        <p class="add_review">
-            <a class="edit_ticket" href="{% url 'edit_review' review.ticket.id review.id %}">Modifier</a>
-            <a class="delete_ticket" href="{% url 'delete_review' review.ticket.id review.id %}">Supprimer</a>
-        </p>
-    {% endif %}
-    <p><a href="{% url 'home' %}">Retour au flux</a></p>
 
 {% endblock content %}
