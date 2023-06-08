@@ -163,15 +163,15 @@ nav > ul li:hover .sous-menu{
     border-radius: 100px;
 }
 
-.main{
-    margin-top: 5px;
-    padding: 20px;
+.main h2{
+    margin: 1%;
+    text-align: center;
 }
 
 .grid-container{
     display: grid;
     width: 100%;
-    height: 70%;
+    height: 60%;
     grid-template-columns: 1fr 1fr 1fr;
     justify-items: center;
     overflow: hidden;
@@ -185,8 +185,8 @@ nav > ul li:hover .sous-menu{
     border-radius: 50px;
     box-shadow: 0 0 4px var(--main-bg-color);
     padding: 10px;
-    width: 80%;
-    height: 80%;
+    width: 90%;
+    height: 70%;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -194,7 +194,7 @@ nav > ul li:hover .sous-menu{
 .ticket img{
     height: 70px;
     width: 70px;
-    margin: 10px;
+    margin: 1%;
     border: 1px solid var(--border-color);
     border-radius: 20px;
 }
@@ -203,6 +203,7 @@ nav > ul li:hover .sous-menu{
     font-size: 20px;
     height: 3%;
     width: auto;
+    margin: 3%;
 }
 
 .ticket .user_ticket{
@@ -210,14 +211,10 @@ nav > ul li:hover .sous-menu{
     font-size: 22px;
 }
 
-.ticket .description{
-    font-size: 16px;
-    height: 15%;
-}
-
 .ticket .date{
     font-size: 12px;
     text-align: end;
+    margin: 1%;
 }
 
 .ticket .add_review{
@@ -233,5 +230,119 @@ nav > ul li:hover .sous-menu{
 }
 
 .pagin{
-    margin-left: 40%;
+    margin-left: 25%;
+}
+
+.form_tr_container{
+    display: grid;
+    grid-template-area: 'ticket . review'
+                        '. publish .';
+}
+
+.form_tr_ticket{
+    text-align: start;
+    text-overflow: ellipsis;
+}
+
+.form_tr_ticket h3, p{
+    text-align: center;
+}
+
+.form_tr_review{
+    text-align: end;
+}
+
+.form_tr_review h3, p{
+    text-align: center;
+    margin: 2%;
+}
+
+.form_tr_review #id_rating{
+    text-align: center;
+    font-size: 16px;
+}
+
+.form_tr_publish{
+    grid-area: publish;
+}
+
+.delete_form{
+    text-align: start;
+}
+
+.review{
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    border: 2px solid var(--border-color);
+    border-radius: 50px;
+    box-shadow: 0 0 4px var(--main-bg-color);
+    padding: 10px;
+    width: 90%;
+    height: 70%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.review p{
+    font-size: 20px;
+    height: 3%;
+    width: auto;
+    margin: 3%;
+}
+
+.review .user_review{
+    text-align: center;
+    font-size: 22px;
+}
+
+.review .rating{
+    margin-top: 2%;
+    margin-bottom: 5%;
+}
+
+.review .date{
+    font-size: 12px;
+    text-align: end;
+    margin: 1%;
+}
+
+.ticket_for_review{
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    border: 2px solid var(--border-color);
+    border-radius: 50px;
+    box-shadow: 0 0 4px var(--main-bg-color);
+    padding: 10px;
+    width: 95%;
+    height: 50%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ticket_for_review img{
+    height: 50px;
+    width: 50px;
+    margin: 1%;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+}
+
+.ticket_for_review p{
+    font-size: 13px;
+    height: 3%;
+    width: auto;
+    margin: 3%;
+}
+
+.ticket_for_review .user_ticket{
+    text-align: center;
+    font-size: 15px;
+}
+
+.description_for_review{
+    margin-left: 20%;
+    width: 60%;
+    text-align: center;
 }

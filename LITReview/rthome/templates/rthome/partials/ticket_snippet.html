@@ -1,0 +1,12 @@
+{% load static %}
+<div class="ticket">
+    <p class="date">édité le {{ ticket.time_created }}</p>
+    <p class="user_ticket">{{ ticket.user }} a demandé une critique</p>
+    <p>{{ ticket.title }} - {{ ticket.author }}</p>
+    {% if ticket.image %}
+        <img src="{{ ticket.image.url }}">
+    {% else %}
+        <img src="{% static 'images/default_profile.png' %}">
+    {% endif %}
+    <p><a class="add_review" href="{% url 'create_review' ticket.id %}">Ajouter une critique</a></p>
+</div>

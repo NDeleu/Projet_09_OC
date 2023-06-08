@@ -5,10 +5,13 @@
     <p>Êtes-vous sûr de vouloir supprimer ce ticket ?</p>
 
     <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" >Oui</button>
+        <div class="form_tr_container">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="form_tr_publish">
+                <p class="delete_form"><button type="submit" >Oui</button>
+                    <a href="{% url 'post_edit' %}">Non</a></p>
+            </div>
+        </div>
     </form>
-
-    <p><a href="{% url 'post_edit' %}">Non</a></p>
 {% endblock content %}

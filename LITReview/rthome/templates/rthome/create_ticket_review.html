@@ -1,13 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2>Créer un ticket</h2>
+    <h2>Créer un ticket et une critique</h2>
     <form method="post" enctype="multipart/form-data">
         <div class="form_tr_container">
             {% csrf_token %}
             <div class="form_tr_ticket">
-                {{ form.as_p }}
+                <h3>Ticket</h3>
+                {{ ticket_form.as_p }}
             </div>
-            <div class="form_tr_review"></div>
+            <div class="form_tr_review">
+                <h3>Critique</h3>
+                {{ review_form.as_p }}
+            </div>
             <div class="form_tr_publish">
                 <button type="submit" >Publier</button>
             </div>

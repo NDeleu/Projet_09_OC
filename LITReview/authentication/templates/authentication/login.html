@@ -2,9 +2,18 @@
 {% block content %}
     <p>{{ message }}</p>
     <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Se connecter</button>
+        <div class="form_tr_container">
+            {% csrf_token %}
+            <div class="form_tr_ticket">
+                {{ form.as_p }}
+            </div>
+            <div class="form_tr_review"></div>
+            <div class="publish">
+                <p>
+                    <button type="submit">Se connecter</button>
+                </p>
+            </div>
+        </div>
     </form>
     <p><a href="{% url 'signup' %}">S'inscrire</a></p>
 {% endblock content %}

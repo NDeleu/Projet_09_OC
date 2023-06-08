@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2>Erreur d'édition d'une critique</h2>
+
+    <p>Il n'est possible d'éditer qu'une seule critique par utilisateur sur un même ticket</p>
+    <p>Vous avez déjà édité une critique sur le ticket concernant {{ ticket.title }} - {{ ticket.author }} édité par {{ ticket.user }} le {{ ticket.time_created }}</p>
+
+    <p><a href="{% url 'home' %}">Retour au flux</a></p>
+{% endblock content %}

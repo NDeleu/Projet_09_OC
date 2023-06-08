@@ -28,11 +28,11 @@
                             <li class="menu"><a href="#">Mes posts</a>
                                 <ul class="sous-menu">
                                     <li><a id="nav-create-ticket" href="{% url 'create_ticket' %}">Créer un ticket</a></li>
-                                    <li><a id="nav-create-critique" href="#">Créer une critique</a></li>
+                                    <li><a id="nav-create-critique" href="{% url 'create_ticket_and_review' %}">Créer une critique</a></li>
                                     <li><a id="nav-edit-posts" href="{% url 'post_edit' %}">Éditer mes posts</a></li>
                                 </ul>
                             </li>
-                            <li class="menu"><a href="#">Mon profile</a>
+                            <li class="menu"><a href="#">Mon profil</a>
                                 <ul class="sous-menu">
                                     <li><a id="nav-edit-picture-profile" href="{% url 'upload_profile_photo' %}">Changer de photo de profile</a></li>
                                     <li><a id="nav-edit-password" href="{% url 'password_change' %}">Changer de mot de passe</a></li>

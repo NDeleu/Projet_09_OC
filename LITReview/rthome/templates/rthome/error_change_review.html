@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2>Erreur de modification d'une critique</h2>
+
+    <p>Seul le créateur de la critique peut modifier ou supprimer cette critique.</p>
+    <p>Vous n'êtes pas le créateur de cette critique. Son créateur est {{ review.user }} répondant au ticket de {{ ticket.user }}.</p>
+
+    <p><a href="{% url 'home' %}">Retour au flux</a></p>
+{% endblock content %}

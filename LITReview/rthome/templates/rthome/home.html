@@ -1,20 +1,15 @@
 {% extends 'base.html' %}
+{% load rthome_extras %}
 {% block content %}
 {% load static %}
+    <h2>Mon flux</h2>
     <div class="grid-container">
-        {% for ticket in page_obj %}
-            <div class="ticket">
-                <p class="date">édité le {{ ticket.time_created }}</p>
-                <p class="user_ticket">{{ ticket.user }} a demandé une critique</p>
-                <p>{{ ticket.title }} - {{ ticket.author }}</p>
-                <p class="description">{{ ticket.description }}</p>
-                {% if ticket.image %}
-                    <img src="{{ ticket.image.url }}">
-                {% else %}
-                    <img src="{% static 'images/default_profile.png' %}">
-                {% endif %}
-                <p class="add_review"><a href="#">Ajouter une critique</a></p>
-            </div>
+        {% for instance in page_obj %}
+            {% if instance|model_type == 'Ticket' %}
+                {% include 'rthome/partials/ticket_snippet.html' with ticket=instance %}
+            {% elif instance|model_type == 'Review' %}
+                {% include 'rthome/partials/review_snippet.html' with review=instance %}
+            {% endif %}
         {% endfor %}
     </div>
     {% include 'partials/page_navigator.html' %}

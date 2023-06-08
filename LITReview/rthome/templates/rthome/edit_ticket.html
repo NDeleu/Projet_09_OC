@@ -2,8 +2,15 @@
 {% block content %}
     <h2>Modification du ticket sur {{ ticket.title }} - {{ ticket.author }}</h2>
     <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" >Modifier</button>
+        <div class="form_tr_container">
+            {% csrf_token %}
+            <div class="form_tr_ticket">
+                {{ form.as_p }}
+            </div>
+            <div class="form_tr_review"></div>
+            <div class="form_tr_publish">
+                <button type="submit" >Modifier</button>
+            </div>
+        </div>
     </form>
 {% endblock content %}

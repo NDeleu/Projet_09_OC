@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2>Erreur de modification d'un ticket</h2>
+
+    <p>Seul le créateur du ticket peut modifier ou supprimer ce ticket.</p>
+    <p>Vous n'êtes pas le créateur de ce ticket. Son créateur est {{ ticket.user }}.</p>
+
+    <p><a href="{% url 'home' %}">Retour au flux</a></p>
+{% endblock content %}

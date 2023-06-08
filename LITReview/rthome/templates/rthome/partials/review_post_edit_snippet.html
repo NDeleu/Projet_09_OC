@@ -1,0 +1,28 @@
+{% load static %}
+<div class="review">
+    <p class="date">édité le {{ review.time_created }}</p>
+    <p class="user_review">{{ review.user }} a proposé une critique</p>
+    <p class="headline">{{ review.headline }}</p>
+    {% if review.rating == 1 %}
+        <p class="rating">★☆☆☆☆</p>
+    {% elif review.rating == 2 %}
+        <p class="rating">★★☆☆☆</p>
+    {% elif review.rating == 3 %}
+        <p class="rating">★★★☆☆</p>
+    {% elif review.rating == 4 %}
+        <p class="rating">★★★★☆</p>
+    {% elif review.rating == 5 %}
+        <p class="rating">★★★★★</p>
+    {% else %}
+        <p class="rating">☆☆☆☆☆</p>
+    {% endif %}
+    <div class="ticket_for_review">
+        <p class="user_ticket">{{ review.ticket.user }} a demandé une critique</p>
+        <p>{{ review.ticket.title }} - {{ review.ticket.author }}</p>
+        {% if review.ticket.image %}
+            <img src="{{ review.ticket.image.url }}">
+        {% else %}
+            <img src="{% static 'images/default_profile.png' %}">
+        {% endif %}
+    </div>
+</div>
