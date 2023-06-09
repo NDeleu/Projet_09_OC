@@ -1,23 +1,34 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
-    <h2>Abonnements</h2>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" >Confirmer</button>
-        </form>
+    <div class="abonnement">
+        <h2 class="abo_title">Abonnements</h2>
+        <div class="abo_form">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" >Confirmer</button>
+            </form>
+        </div>
 
-    <h3>Mes abonnements</h3>
-    {% for following in following_all %}
-        <p>{{ following.followed_user_name }} <a href="{% url 'delete_follow' following.id %}">[X]</a></p>
-    {% endfor %}
+        <div class="abo_following">
+            <h4>Mes abonnements</h4>
+            <div class="abo_following_container">
+                {% for following in following_all %}
+                    <p>{{ following.followed_user_name }} <a href="{% url 'delete_follow' following.id %}">[X]</a></p>
+                {% endfor %}
+            </div>
+        </div>
 
-    <h3>Mes abonnés</h3>
-    {% for followed_by in followed_by_all %}
-        <p>{{ followed_by.user_name }}</p>
-    {% endfor %}
-
-    <p><a href="{% url 'home' %}">Retour au flux</a></p>
+        <div class="abo_followed_by">
+            <h4>Mes abonnés</h4>
+            <div class="abo_followed_by_container">
+                {% for followed_by in followed_by_all %}
+                    <p>{{ followed_by.user_name }}</p>
+                {% endfor %}
+            </div>
+        </div>
+        <p class="abo_home"><a href="{% url 'home' %}">Retour au flux</a></p>
+    </div>
 
 {% endblock content %}

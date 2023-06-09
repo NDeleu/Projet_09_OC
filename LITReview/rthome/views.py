@@ -11,8 +11,14 @@ from . import forms, models
 def home(request):
     main_user = forms.User.objects.get(username=request.user.username)
     print(main_user.follows.all())
-    tickets = models.Ticket.objects.all()
-    reviews = models.Review.objects.all()
+    tickets = models.Ticket.objects.filter(
+        Q(user__in=main_user.follows.all()) | Q(user=main_user)
+    )
+    reviews = models.Review.objects.filter(
+        Q(user__in=main_user.follows.all()) |
+        Q(user=main_user) |
+        Q(ticket__user=main_user)
+    )
 
     tickets_and_reviews = sorted(
         chain(tickets, reviews),

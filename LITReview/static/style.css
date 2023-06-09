@@ -495,3 +495,66 @@ nav > ul li:hover .sous-menu{
 .review_detail_container .rdet_home{
     grid-area: home;
 }
+
+.abonnement{
+    display: grid;
+    grid-template-areas:    'title title title'
+                            'form form form'
+                            'following following following'
+                            'following following following'
+                            'followed followed followed'
+                            'followed followed followed'
+                            'home home home';
+    text-align: center;
+}
+
+.abonnement p, .abonnement h4{
+    margin: 1%;
+}
+
+.abonnement p{
+    font-size: 18px;
+}
+
+.abonnement .abo_title{
+    grid-area: title;
+}
+
+.abonnement .abo_form{
+    grid-area: form;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.abonnement .abo_following{
+    grid-area: following;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.abonnement .abo_following a{
+    font-size: 18px;
+}
+
+.abonnement .abo_following_container{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-overflow: ellipsis;
+    height: 40%;
+    overflow-y: scroll;
+}
+
+.abonnement .abo_followed_by{
+    grid-area: followed;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.abonnement .abo_followed_by_container{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-overflow: ellipsis;
+    height: 40%;
+    overflow-y: scroll;
+}
+
+.abonnement .abo_home{
+    grid-area: home;
+}
