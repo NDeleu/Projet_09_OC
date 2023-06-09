@@ -227,29 +227,43 @@ def review_detail(request, ticket_id, review_id):
 def follow_users(request):
     form = forms.FollowUsersForm(instance=request.user)
     main_user = forms.User.objects.get(username=request.user.username)
-    print(main_user.follows.all())
-    print(main_user.following.all())
-    print(main_user.followed_by.all())
+    following_all = main_user.following.all()
+    followed_by_all = main_user.followed_by.all()
 
-    """
-    tickets_and_reviews = sorted(
-        chain(tickets, reviews),
-        key=lambda instance: instance.time_created,
-        reverse=True
-    )
-    """
-    print()
-    # print(forms.User.objects.all().follows.all())
-    """
-    followings = models.
-    followeds_by =
-    """
+    # print(main_user.follows.all())
 
     if request.method == 'POST':
         form = forms.FollowUsersForm(request.POST, instance=request.user)
         if form.is_valid():
             user_add = form.cleaned_data['follows']
-            main_user.follows.add(user_add[0])
-            return redirect('home')
+            main_user.follows.add(
+                user_add[0],
+                through_defaults={
+                    'user_name': request.user.username,
+                    'followed_user_name': user_add[0].username
+                })
+            return redirect('follow_users')
+
+    context = {
+        'form': form,
+        'following_all': following_all,
+        'followed_by_all': followed_by_all,
+    }
+
     return render(
-        request, 'rthome/follow_users_form.html', context={'form': form})
+        request, 'rthome/follow_users_form.html', context=context)
+
+
+@login_required
+def delete_follow(request, following_id):
+    main_user = forms.User.objects.get(username=request.user.username)
+    following = get_object_or_404(main_user.following.all(), id=following_id)
+
+    if request.method == 'POST':
+        following.delete()
+        return redirect('follow_users')
+
+    return render(
+        request,
+        'rthome/delete_follow.html',
+        context={'following': following})

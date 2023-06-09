@@ -3,14 +3,20 @@
 {% load static %}
     <h2>Abonnements</h2>
         <form method="post">
-            {{ form.as_p }}
             {% csrf_token %}
+            {{ form.as_p }}
             <button type="submit" >Confirmer</button>
         </form>
 
     <h3>Mes abonnements</h3>
+    {% for following in following_all %}
+        <p>{{ following.followed_user_name }} <a href="{% url 'delete_follow' following.id %}">[X]</a></p>
+    {% endfor %}
 
     <h3>Mes abonnés</h3>
+    {% for followed_by in followed_by_all %}
+        <p>{{ followed_by.user_name }}</p>
+    {% endfor %}
 
     <p><a href="{% url 'home' %}">Retour au flux</a></p>
 

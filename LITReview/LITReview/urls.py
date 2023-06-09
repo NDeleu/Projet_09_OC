@@ -68,7 +68,12 @@ urlpatterns = [
          rthome.views.ticket_detail, name='ticket_detail'),
     path('ticket/<int:ticket_id>/review/<int:review_id>/detail/',
          rthome.views.review_detail, name='review_detail'),
-    path('follow-users/', rthome.views.follow_users, name='follow_users'),
+    path('follow-users/listing/',
+         rthome.views.follow_users,
+         name='follow_users'),
+    path('follow-users/detail/<int:following_id>/delete',
+         rthome.views.delete_follow,
+         name='delete_follow'),
 ]
 
 if settings.DEBUG:

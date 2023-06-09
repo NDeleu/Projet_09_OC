@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2>Suppression de l'abonnement avec {{ following.followed_user_name }} </h2>
+
+    <p>Êtes-vous sûr de vouloir supprimer votre abonnement ?</p>
+
+    <form method="post">
+        <div class="form_tr_container">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="form_tr_publish">
+                <p class="delete_form"><button type="submit" >Oui</button>
+                    <a href="{% url 'follow_users' %}">Non</a></p>
+            </div>
+        </div>
+    </form>
+{% endblock content %}
