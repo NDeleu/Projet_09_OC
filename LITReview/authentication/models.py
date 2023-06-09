@@ -8,6 +8,7 @@ class User(AbstractUser):
         null=True, blank=True, verbose_name='photo de profile')
     follows = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
+        symmetrical=False,
         through='UserFollows',
         related_name='followers')
 

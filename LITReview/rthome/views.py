@@ -9,6 +9,8 @@ from . import forms, models
 
 @login_required
 def home(request):
+    main_user = forms.User.objects.get(username=request.user.username)
+    print(main_user.follows.all())
     tickets = models.Ticket.objects.all()
     reviews = models.Review.objects.all()
 
@@ -225,24 +227,29 @@ def review_detail(request, ticket_id, review_id):
 
 @login_required
 def follow_users(request):
-    form = forms.FollowUsersForm(instance=request.user)
+    form = forms.FollowUsersForm()
     main_user = forms.User.objects.get(username=request.user.username)
     following_all = main_user.following.all()
     followed_by_all = main_user.followed_by.all()
 
-    # print(main_user.follows.all())
-
     if request.method == 'POST':
-        form = forms.FollowUsersForm(request.POST, instance=request.user)
+        form = forms.FollowUsersForm(request.POST)
         if form.is_valid():
-            user_add = form.cleaned_data['follows']
-            main_user.follows.add(
-                user_add[0],
-                through_defaults={
-                    'user_name': request.user.username,
-                    'followed_user_name': user_add[0].username
-                })
-            return redirect('follow_users')
+            user_pre_add = form.cleaned_data['follows']
+
+            if user_pre_add == request.user.username:
+                return redirect('error_self_follow')
+            else:
+
+                user_add = forms.User.objects.get(username=user_pre_add)
+                main_user.follows.add(
+                    user_add,
+                    through_defaults={
+                        'user_name': request.user.username,
+                        'followed_user_name': user_add.username
+                    })
+
+                return redirect('follow_users')
 
     context = {
         'form': form,
@@ -252,6 +259,11 @@ def follow_users(request):
 
     return render(
         request, 'rthome/follow_users_form.html', context=context)
+
+
+@login_required
+def error_self_follow(request):
+    return render(request, 'rthome/error_self_follow.html')
 
 
 @login_required

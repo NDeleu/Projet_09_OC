@@ -74,6 +74,8 @@ urlpatterns = [
     path('follow-users/detail/<int:following_id>/delete',
          rthome.views.delete_follow,
          name='delete_follow'),
+    path('follow-users/error-self-follow/',
+         rthome.views.error_self_follow, name='error_self_follow')
 ]
 
 if settings.DEBUG:

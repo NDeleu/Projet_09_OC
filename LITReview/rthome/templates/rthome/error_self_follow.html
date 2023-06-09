@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2>Erreur de création d'abonnement</h2>
+
+    <p>Il est impossible de créer un abonnement avec soi-même.</p>
+
+    <p><a href="{% url 'follow_users' %}">Retour aux abonnements</a></p>
+{% endblock content %}

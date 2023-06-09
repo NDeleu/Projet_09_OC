@@ -33,6 +33,16 @@ class ReviewForm(forms.ModelForm):
 
 
 class FollowUsersForm(forms.ModelForm):
+    follows = forms.CharField(label="Nom d'utilisateur", max_length=128)
+
     class Meta:
         model = User
         fields = ['follows']
+
+    def clean_follows(self):
+        follows = self.cleaned_data['follows']
+        
+        if not User.objects.filter(username=follows):
+            raise forms.ValidationError("Cet utilisateur n'est pas reconnu dans la base de donnée.")
+
+        return follows
