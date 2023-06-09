@@ -1,6 +1,9 @@
 from django import forms
+from django.contrib.auth import get_user_model
 
 from . import models
+
+User = get_user_model()
 
 
 class TicketForm(forms.ModelForm):
@@ -28,19 +31,8 @@ class ReviewForm(forms.ModelForm):
         model = models.Review
         fields = ['headline', 'rating', 'body']
 
-"""
-    def clean(self):
-        ticket = self.cleaned_data.get('ticket')
-        user = self.cleaned_data.get('user')
-        print(ticket)
-        print(user)
 
-        if ticket and user:
-            review_compared = models.Review.objects.filter(
-                Q(ticket__id=str(ticket.id)) & Q(user__id=str(user.id)))
-            print(review_compared)
-            if review_compared:
-                raise forms.ValidationError("Il n'est possible d'éditer qu'une seule critique par utilisateur sur un même ticket. Vous avez déjà une critique éditée sur ce ticket.")
-        
-        return self.cleaned_data
-"""
+class FollowUsersForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['follows']

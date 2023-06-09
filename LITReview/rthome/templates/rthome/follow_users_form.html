@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+    <h2>Abonnements</h2>
+        <form method="post">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <button type="submit" >Confirmer</button>
+        </form>
+
+    <h3>Mes abonnements</h3>
+
+    <h3>Mes abonnés</h3>
+
+    <p><a href="{% url 'home' %}">Retour au flux</a></p>
+
+{% endblock content %}

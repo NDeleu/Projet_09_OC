@@ -221,3 +221,35 @@ def review_detail(request, ticket_id, review_id):
     return render(
         request, 'rthome/review_detail.html',
         context={'ticket': ticket, 'review': review})
+
+
+@login_required
+def follow_users(request):
+    form = forms.FollowUsersForm(instance=request.user)
+    main_user = forms.User.objects.get(username=request.user.username)
+    print(main_user.follows.all())
+    print(main_user.following.all())
+    print(main_user.followed_by.all())
+
+    """
+    tickets_and_reviews = sorted(
+        chain(tickets, reviews),
+        key=lambda instance: instance.time_created,
+        reverse=True
+    )
+    """
+    print()
+    # print(forms.User.objects.all().follows.all())
+    """
+    followings = models.
+    followeds_by =
+    """
+
+    if request.method == 'POST':
+        form = forms.FollowUsersForm(request.POST, instance=request.user)
+        if form.is_valid():
+            user_add = form.cleaned_data['follows']
+            main_user.follows.add(user_add[0])
+            return redirect('home')
+    return render(
+        request, 'rthome/follow_users_form.html', context={'form': form})

@@ -68,6 +68,7 @@ urlpatterns = [
          rthome.views.ticket_detail, name='ticket_detail'),
     path('ticket/<int:ticket_id>/review/<int:review_id>/detail/',
          rthome.views.review_detail, name='review_detail'),
+    path('follow-users/', rthome.views.follow_users, name='follow_users'),
 ]
 
 if settings.DEBUG:
