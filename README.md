@@ -67,12 +67,12 @@ Néanmoins si vous désirez avoir une base de donnes vierge en supprimant la bas
 - Pour cela, dans votre terminal, initialisez une migration puis faites une migration, en saisissant dans votre terminal :
 
 Sur Microsoft Windows :
-                            `python manage.py makemigrations`
+                            `python manage.py makemigrations`   
                             `python manage.py migrate`
 
 
 Sur Linux ou Mac :
-                            `python3 manage.py makemigrations`
+                            `python3 manage.py makemigrations`  
                             `python3 manage.py migrate`
 
 - Attention : en créant une nouvelle base de donnée, l'administrateur a aussi été supprimé. Si vous souhaitez profiter de nouveau des provilèges administrateurs, il faudra créer un nouvel administrateur.
