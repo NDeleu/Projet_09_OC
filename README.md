@@ -20,7 +20,7 @@ Sous Microsoft Windows : `python -m venv env`
 Sous Linux et Mac : `python3 -m venv env`
 
 - Connectez vous à cet environnement virtuel :
-- 
+
 Sur un terminal Windows powershell : `env/Scripts/Activate.ps1`
 
 Sur un terminal Windows invite de commande : `env/Scripts/activate.bat`
