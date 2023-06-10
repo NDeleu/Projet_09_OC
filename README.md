@@ -66,11 +66,11 @@ Il est alors possible à partir de cette page de gérer la majorité des donnée
 Néanmoins si vous désirez avoir une base de donnes vierge en supprimant la base de donnée "db.sqlite3" et le dossier "media", il vous faudra générer une nouvelle base de donnée.
 - Pour cela, dans votre terminal, initialisez une migration puis faites une migration, en saisissant dans votre terminal :
 
-Sur Microsoft Windows :
+Sur Microsoft Windows :     
                             `python manage.py makemigrations`                               
                             `python manage.py migrate`
 
-Sur Linux ou Mac :
+Sur Linux ou Mac :      
                             `python3 manage.py makemigrations`                              
                             `python3 manage.py migrate`
 
