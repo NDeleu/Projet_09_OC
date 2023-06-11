@@ -266,6 +266,11 @@ nav > ul li:hover .sous-menu{
     grid-area: publish;
 }
 
+.form_tr_publish_signup{
+    display: inline;
+    text-align: center;
+}
+
 .delete_form{
     text-align: start;
 }

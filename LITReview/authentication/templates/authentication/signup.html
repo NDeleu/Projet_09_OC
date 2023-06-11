@@ -5,8 +5,15 @@
         {{ form.errors }}
     {% endif %}
     <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">S'inscrire</button>
+        <div class="form_tr_container">
+            {% csrf_token %}
+            <div class="form_tr_ticket">
+                {{ form.as_p }}
+            </div>
+            <div class="form_tr_review"></div>
+            <div class="form_tr_publish_signup">
+                <button type="submit">S'inscrire</button>
+            </div>
+        </div>
     </form>
 {% endblock content %}
