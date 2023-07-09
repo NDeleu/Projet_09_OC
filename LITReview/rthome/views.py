@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.core.paginator import Paginator
 from itertools import chain
 from django.db.models import Q
 
@@ -10,7 +9,6 @@ from . import forms, models
 @login_required
 def home(request):
     main_user = forms.User.objects.get(username=request.user.username)
-    print(main_user.follows.all())
     tickets = models.Ticket.objects.filter(
         Q(user__in=main_user.follows.all()) | Q(user=main_user)
     )
@@ -26,10 +24,7 @@ def home(request):
         reverse=True
     )
 
-    paginator = Paginator(tickets_and_reviews, 3)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    context = {'page_obj': page_obj}
+    context = {'tickets_and_reviews': tickets_and_reviews}
     return render(request, 'rthome/home.html', context=context)
 
 
@@ -44,10 +39,7 @@ def post_edit(request):
         reverse=True
     )
 
-    paginator = Paginator(tickets_and_reviews, 3)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    context = {'page_obj': page_obj}
+    context = {'tickets_and_reviews': tickets_and_reviews}
     return render(request, 'rthome/post_edit.html', context=context)
 
 

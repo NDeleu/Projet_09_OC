@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load crispy_forms_tags %}
     <h2>Inscription</h2>
     {% if form.errors %}
         {{ form.errors }}
@@ -8,7 +9,7 @@
         <div class="form_tr_container">
             {% csrf_token %}
             <div class="form_tr_ticket">
-                {{ form.as_p }}
+                {{ form|crispy }}
             </div>
             <div class="form_tr_review"></div>
             <div class="form_tr_publish_signup">

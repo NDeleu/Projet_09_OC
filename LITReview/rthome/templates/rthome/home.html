@@ -2,9 +2,9 @@
 {% block content %}
 {% load rthome_extras %}
 {% load static %}
-    <h2>Mon flux</h2>
-    <div class="grid-container">
-        {% for instance in page_obj %}
+    <div class="container text-center">
+        <h2>Mon flux</h2>
+        {% for instance in tickets_and_reviews %}
             {% if instance|model_type == 'Ticket' %}
                 {% include 'rthome/partials/ticket_snippet.html' with ticket=instance %}
             {% elif instance|model_type == 'Review' %}
@@ -12,5 +12,4 @@
             {% endif %}
         {% endfor %}
     </div>
-    {% include 'partials/page_navigator.html' %}
 {% endblock content%}

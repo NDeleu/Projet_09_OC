@@ -4,7 +4,9 @@
 {% load static %}
     <h2>Mes Posts</h2>
     <div class="grid-container">
-        {% for instance in page_obj %}
+        <a id="nav-create-ticket" href="{% url 'create_ticket' %}">Créer un ticket</a>
+        <a id="nav-create-critique" href="{% url 'create_ticket_and_review' %}">Créer une critique</a>
+        {% for instance in tickets_and_reviews %}
             {% if instance|model_type == 'Ticket' %}
                 {% include 'rthome/partials/ticket_post_edit_snippet.html' with ticket=instance %}
             {% elif instance|model_type == 'Review' %}
@@ -12,5 +14,4 @@
             {% endif %}
         {% endfor %}
     </div>
-    {% include 'partials/page_navigator.html' %}
 {% endblock content%}

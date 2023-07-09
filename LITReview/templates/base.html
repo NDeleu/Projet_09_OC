@@ -2,47 +2,67 @@
 <html lang="fr" xmlns="http://www.w3.org/1999/html">
     <head>
         <title>LITReview</title>
-        <link rel="stylesheet" href="{% static 'style.css' %}">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link
+        rel="stylesheet"
+        type="text/css"
+        href="{% static 'css/bootstrap.css' %}">
     </head>
     <body>
-        <div class="container-all">
-            <div class="bartitle">
-                <h1>LITReview</h1>
-            </div>
-            <div class="barmenu">
+
+        <div class="container border p-0">
+            <div class="sticky-top bg-body-tertiary border">
+                <div class="text-center border">
+                    <h1>LITReview</h1>
+                </div>
                 {% if user.is_authenticated %}
-                    {% if user.profile_photo %}
-                        <img class="pic_profile" src="{{ user.profile_photo.url }}">
-                    {% else %}
-                        <img class="pic_profile" src="{% static 'images/default_profile.png' %}">
-                    {% endif %}
-                    <p class="name_profile">{{ request.user }}</p>
-                    <nav>
-                        <ul>
-                            <li class="menu"><a href="#">Mon flux</a>
-                                <ul class="sous-menu">
-                                    <li><a id="nav-homepage" href="{% url 'home' %}">Accueil</a></li>
-                                    <li><a id="nav-abonnements" href="{% url 'follow_users' %}">Abonnements</a></li>
+                    <nav class="navbar navbar-expand-lg border">
+                        <div class="container-fluid">
+                            <a class="navbar-brand" href="#">
+                                {% if user.profile_photo %}
+                                    <img src="{{ user.profile_photo.url }}" alt="ProfilePicture" width="60" class="img-thumbnail d-inline-block align-text-center">
+                                {% else %}
+                                    <img src="{% static 'images/default_profile.png' %}" alt="ProfilePicture" width="60" class="img-thumbnail d-inline-block align-text-center">
+                                {% endif %}
+                                {{ request.user }}
+                            </a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                              <span class="navbar-toggler-icon"></span>
+                            </button>
+
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Menu
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="{% url 'home' %}">Accueil</a></li>
+                                            <li><a class="dropdown-item" href="{% url 'post_edit' %}">Éditer mes posts</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item" href="{% url 'follow_users' %}">Abonnements</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Compte
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="{% url 'upload_profile_photo' %}">Changer de photo de profil</a></li>
+                                            <li><a class="dropdown-item" href="{% url 'password_change' %}">Changer de mot de passe</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'logout' %}">Déconnection</a>
+                                    </li>
                                 </ul>
-                            </li>
-                            <li class="menu"><a href="#">Mes posts</a>
-                                <ul class="sous-menu">
-                                    <li><a id="nav-create-ticket" href="{% url 'create_ticket' %}">Créer un ticket</a></li>
-                                    <li><a id="nav-create-critique" href="{% url 'create_ticket_and_review' %}">Créer une critique</a></li>
-                                    <li><a id="nav-edit-posts" href="{% url 'post_edit' %}">Éditer mes posts</a></li>
-                                </ul>
-                            </li>
-                            <li class="menu"><a href="#">Mon profil</a>
-                                <ul class="sous-menu">
-                                    <li><a id="nav-edit-picture-profile" href="{% url 'upload_profile_photo' %}">Changer de photo de profil</a></li>
-                                    <li><a id="nav-edit-password" href="{% url 'password_change' %}">Changer de mot de passe</a></li>
-                                </ul>
-                            </li>
-                            <li class="menu logout"><a href="{% url 'logout' %}">Déconnection</a></li>
-                        </ul>
+                            </div>
+                        </div>
                     </nav>
                 {% endif %}
             </div>
+
             <div class="main">
                 {% block content %}{% endblock content %}
             </div>
