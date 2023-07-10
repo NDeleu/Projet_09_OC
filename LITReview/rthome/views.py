@@ -174,7 +174,7 @@ def edit_review(request, ticket_id, review_id):
                     review.save()
                     return redirect('post_edit')
     return render(
-        request, 'rthome/create_review.html',
+        request, 'rthome/edit_review.html',
         context={'ticket': ticket, 'review': review, 'form': form})
 
 

@@ -16,7 +16,7 @@
         </div>
         <div class="row py-1">
             {% if ticket.image %}
-                <img class="col-2 text-start" src="{{ ticket.image.url }}">
+                <img class="col-2 text-start border border-secondary" src="{{ ticket.image.url }}">
             {% endif %}
             <p class="col-4"></p>
             <p class="col text-end">Description : {{ ticket.description }}</p>

@@ -1,20 +1,20 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load crispy_forms_tags %}
-    <h2>Inscription</h2>
-    {% if form.errors %}
-        {{ form.errors }}
-    {% endif %}
-    <form method="post">
-        <div class="form_tr_container">
-            {% csrf_token %}
-            <div class="form_tr_ticket">
-                {{ form|crispy }}
-            </div>
-            <div class="form_tr_review"></div>
-            <div class="form_tr_publish_signup">
-                <button type="submit">S'inscrire</button>
-            </div>
+    <div class="px-5 py-2 container">
+        <div class="row pt-1 pb-3">
+            <h2 class="col text-center">Inscription</h2>
         </div>
-    </form>
+        <div class="row py-1">
+            {% if form.errors %}
+                {{ form.errors }}
+            {% endif %}
+        </div>
+        <form class="row pt-1 pb-3 justify-content-end" method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <a class="col-2 btn btn-outline-secondary me-3" href="{% url 'login' %}">Retour</a>
+            <button class="col-2 btn btn-outline-secondary ms-3" type="submit">S'inscrire</button>
+        </form>
+    </div>
 {% endblock content %}
