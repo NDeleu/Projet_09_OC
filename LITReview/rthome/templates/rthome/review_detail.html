@@ -2,48 +2,62 @@
 {% block content %}
 {% load rthome_extras %}
 {% load static %}
-    <div class="review_detail_container">
-        <h3 class="rdet_hautp">Critique concernant le ticket sur {{ ticket.title }} - {{ ticket.author }}</h3>
-
-        <p class="rdet_headline">Epingle : {{ review.headline }}</p>
-        <div class="rdet_rating">
-            {% if review.rating == 1 %}
-                <p class="rating">★☆☆☆☆</p>
-            {% elif review.rating == 2 %}
-                <p class="rating">★★☆☆☆</p>
-            {% elif review.rating == 3 %}
-                <p class="rating">★★★☆☆</p>
-            {% elif review.rating == 4 %}
-                <p class="rating">★★★★☆</p>
-            {% elif review.rating == 5 %}
-                <p class="rating">★★★★★</p>
-            {% else %}
-                <p class="rating">☆☆☆☆☆</p>
-            {% endif %}
+    <div class="px-5 py-2 container">
+        <div class="row py-1">
+            <h3 class="col text-center">Critique concernant le ticket sur {{ ticket.title }} - {{ ticket.author }}</h3>
         </div>
-        <p class="rdet_user">Critique éditée par {% user_pronoun_choice review.user %}</p>
-        <p class="rdet_date">Le : {{ review.time_created }}</p>
-        <p class="rdet_body">Commentaire : {{ review.body }}</p>
-        <div class="rdet_ticket_container">
-            <p class="rdet_ticket_user"><a href="{% url 'ticket_detail' review.ticket.id %}">Critique demandée par {% user_pronoun_choice review.ticket.user %}</a></p>
-            <p class="rdet_ticket_title">{{ review.ticket.title }} - {{ review.ticket.author }}</p>
-            <div class="rdet_ticket_image">
-                {% if review.ticket.image %}
-                    <img src="{{ review.ticket.image.url }}">
+        <div class="row py-1">
+            <p class="col text-start">Critique éditée par {% user_pronoun_choice review.user %}</p>
+            <p class="col text-end">Le : {{ review.time_created }}</p>
+        </div>
+        <div class="row py-1">
+            <p class="col text-start">
+                {{ review.headline }} -
+                {% if review.rating == 1 %}
+                    ★☆☆☆☆
+                {% elif review.rating == 2 %}
+                    ★★☆☆☆
+                {% elif review.rating == 3 %}
+                    ★★★☆☆
+                {% elif review.rating == 4 %}
+                    ★★★★☆
+                {% elif review.rating == 5 %}
+                    ★★★★★
                 {% else %}
-                    <img src="{% static 'images/default_profile.png' %}">
+                    ☆☆☆☆☆
                 {% endif %}
+            </p>
+            <p class="col text-center">Commentaire : {{ review.body }}</p>
+        </div>
+        <div class="row py-1">
+            <div class="px-5 py-2 container border border-2 border-secondary">
+                <div class="row py-1">
+                    <p class="col fs-5 text-start">
+                        <a class="col link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="{% url 'ticket_detail' review.ticket.id %}">
+                            Critique demandée par {% user_pronoun_choice review.ticket.user %}
+                        </a>
+                    </p>
+                    <p class="col text-end fw-light fst-italic">édité le {{ review.ticket.time_created }}</p>
+                </div>
+                <div class="row py-1">
+                    <p class="col text-start">{{ review.ticket.title }} - {{ review.ticket.author }}</p>
+                </div>
+                <div class="row py-1">
+                    {% if review.ticket.image %}
+                        <img class="col-2 text-start" src="{{ review.ticket.image.url }}">
+                    {% endif %}
+                </div>
             </div>
         </div>
-        <div class="rdet_update">
+        <div class="row py-1 justify-content-center">
             {% if review.user == request.user %}
-                <p>
-                    <a class="edit_ticket" href="{% url 'edit_review' review.ticket.id review.id %}">Modifier</a>
-                    <a class="delete_ticket" href="{% url 'delete_review' review.ticket.id review.id %}">Supprimer</a>
-                </p>
+                <a class="col-2 btn btn-outline-secondary me-3" href="{% url 'edit_review' review.ticket.id review.id %}">Modifier</a>
+                <a class="col-2 btn btn-outline-secondary ms-3" href="{% url 'delete_review' review.ticket.id review.id %}">Supprimer</a>
             {% endif %}
         </div>
-        <p class="rdet_home"><a href="{% url 'home' %}">Retour au flux</a></p>
+        <div class="row py-1 justify-content-center">
+            <a class="col-2 btn btn-outline-secondary" href="{% url 'home' %}">Retour au flux</a>
+        </div>
     </div>
 
 {% endblock content %}
