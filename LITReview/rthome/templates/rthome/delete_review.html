@@ -1,17 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2>Suppression de la critique concernant le ticket sur {{ ticket.title }} - {{ ticket.author }}</h2>
-
-    <p>Êtes-vous sûr de vouloir supprimer cette critique ?</p>
-
-    <form method="post">
-        <div class="form_tr_container">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <div class="form_tr_publish">
-                <p class="delete_form"><button type="submit" >Oui</button>
-                    <a href="{% url 'post_edit' %}">Non</a></p>
-            </div>
+    <div class="px-5 py-2 container">
+        <div class="row pt-1 pb-3">
+            <h2 class="col text-center">Suppression de la critique concernant le ticket sur {{ ticket.title }} - {{ ticket.author }}</h2>
         </div>
-    </form>
+        <div class="row py-1">
+            <p class="col text-center">Êtes-vous sûr de vouloir supprimer cette critique ?</p>
+        </div>
+        <form class="row py-1 justify-content-center" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="col-2 btn btn-outline-secondary me-3" type="submit" >Oui</button>
+                <a class="col-2 btn btn-outline-secondary ms-3" href="{% url 'post_edit' %}">Non</a>
+        </form>
+    </div>
 {% endblock content %}

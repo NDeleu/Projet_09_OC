@@ -1,34 +1,50 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
-    <div class="abonnement">
-        <h2 class="abo_title">Abonnements</h2>
-        <div class="abo_form">
-            <form method="post">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit" >Confirmer</button>
-            </form>
+{% load crispy_forms_tags %}
+    <div class="px-5 py-2 container">
+        <div class="row pt-1 pb-3">
+            <h2 class="col text-center">Onglet d'abonnements</h2>
         </div>
 
-        <div class="abo_following">
-            <h4>Mes abonnements</h4>
-            <div class="abo_following_container">
+        <div class="row pt-3 pb-1">
+            <h4 class="col text-center">Suivre d'autres utilisateurs</h4>
+        </div>
+        <form class="row pt-1 pb-3 justify-content-center" method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button class="col-2 btn btn-outline-secondary" type="submit" >Confirmer</button>
+        </form>
+
+        <div class="row pt-3 pb-1">
+            <h4 class="col text-center">Abonnements</h4>
+        </div>
+        <div class="row py-1">
+            <div class="px-5 py-2 container">
                 {% for following in following_all %}
-                    <p>{{ following.followed_user_name }} <a href="{% url 'delete_follow' following.id %}">[X]</a></p>
+                    <div class="row border border-secondary">
+                        <p class="col-10">{{ following.followed_user_name }}</p>
+                        <a class="col-2 text-center btn btn-outline-secondary" href="{% url 'delete_follow' following.id %}">Désabonner</a>
+                    </div>
                 {% endfor %}
             </div>
         </div>
 
-        <div class="abo_followed_by">
-            <h4>Mes abonnés</h4>
-            <div class="abo_followed_by_container">
+        <div class="row pt-3 pb-1">
+            <h4 class="col text-center">Abonnés</h4>
+        </div>
+        <div class="row py-1">
+            <div class="px-5 py-2 container">
                 {% for followed_by in followed_by_all %}
-                    <p>{{ followed_by.user_name }}</p>
+                    <div class="row border border-secondary">
+                        <p class="col">{{ followed_by.user_name }}</p>
+                    </div>
                 {% endfor %}
             </div>
         </div>
-        <p class="abo_home"><a href="{% url 'home' %}">Retour au flux</a></p>
+        <div class="row pt-3 pb-1 justify-content-center">
+            <a class="col-2 btn btn-outline-secondary" href="{% url 'home' %}">Retour au flux</a>
+        </div>
     </div>
 
 {% endblock content %}
