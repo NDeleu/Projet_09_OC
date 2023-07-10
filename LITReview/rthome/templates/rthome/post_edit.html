@@ -2,16 +2,20 @@
 {% load rthome_extras %}
 {% block content %}
 {% load static %}
-    <h2>Mes Posts</h2>
-    <div class="grid-container">
-        <a id="nav-create-ticket" href="{% url 'create_ticket' %}">Créer un ticket</a>
-        <a id="nav-create-critique" href="{% url 'create_ticket_and_review' %}">Créer une critique</a>
-        {% for instance in tickets_and_reviews %}
-            {% if instance|model_type == 'Ticket' %}
-                {% include 'rthome/partials/ticket_post_edit_snippet.html' with ticket=instance %}
-            {% elif instance|model_type == 'Review' %}
-                {% include 'rthome/partials/review_post_edit_snippet.html' with review=instance %}
-            {% endif %}
-        {% endfor %}
+    <div class="container text-center px-5">
+        <div class="row py-4">
+            <h2>Mes Posts</h2>
+        </div>
+            {% for instance in tickets_and_reviews %}
+                {% if instance|model_type == 'Ticket' %}
+                    <div class="row px-5 py-4">
+                        {% include 'rthome/partials/ticket_post_edit_snippet.html' with ticket=instance %}
+                    </div>
+                {% elif instance|model_type == 'Review' %}
+                    <div class="row px-5 py-4">
+                        {% include 'rthome/partials/review_post_edit_snippet.html' with review=instance %}
+                    </div>
+                {% endif %}
+            {% endfor %}
     </div>
 {% endblock content%}

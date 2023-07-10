@@ -8,16 +8,17 @@
         rel="stylesheet"
         type="text/css"
         href="{% static 'css/bootstrap.css' %}">
+        <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
     </head>
     <body>
 
-        <div class="container border p-0">
-            <div class="sticky-top bg-body-tertiary border">
-                <div class="text-center border">
+        <div class="container border border-2 border-secondary p-0">
+            <div class="sticky-top bg-body-tertiary border-top-bottom border-2 border-secondary">
+                <div class="text-center border-bottom border-2 border-secondary">
                     <h1>LITReview</h1>
                 </div>
                 {% if user.is_authenticated %}
-                    <nav class="navbar navbar-expand-lg border">
+                    <nav class="navbar navbar-expand-lg border-bottom border-2 border-secondary">
                         <div class="container-fluid">
                             <a class="navbar-brand" href="#">
                                 {% if user.profile_photo %}

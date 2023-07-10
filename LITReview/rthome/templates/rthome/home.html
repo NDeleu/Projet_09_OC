@@ -2,13 +2,23 @@
 {% block content %}
 {% load rthome_extras %}
 {% load static %}
-    <div class="container text-center">
-        <h2>Mon flux</h2>
+    <div class="container text-center px-5">
+        <div class="row py-4">
+            <h2>Mon flux</h2>
+        </div>
+        <div class="row justify-content-center py-4">
+            <a class="col-2 btn btn-outline-secondary me-3" href="{% url 'create_ticket' %}">Créer un ticket</a>
+            <a class="col-2 btn btn-outline-secondary ms-3" href="{% url 'create_ticket_and_review' %}">Créer une critique</a>
+        </div>
         {% for instance in tickets_and_reviews %}
             {% if instance|model_type == 'Ticket' %}
-                {% include 'rthome/partials/ticket_snippet.html' with ticket=instance %}
+                <div class="row px-5 py-4">
+                    {% include 'rthome/partials/ticket_snippet.html' with ticket=instance %}
+                </div>
             {% elif instance|model_type == 'Review' %}
-                {% include 'rthome/partials/review_snippet.html' with review=instance %}
+                <div class="row px-5 py-4">
+                    {% include 'rthome/partials/review_snippet.html' with review=instance %}
+                </div>
             {% endif %}
         {% endfor %}
     </div>

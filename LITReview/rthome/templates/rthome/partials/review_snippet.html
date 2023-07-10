@@ -1,29 +1,53 @@
 {% load rthome_extras %}
 {% load static %}
-<div class="review">
-    <p class="date">édité le {{ review.time_created }}</p>
-    <p class="user_review"><a href="{% url 'review_detail' review.ticket.id review.id %}">Critique proposée par {% user_pronoun_choice review.user %}</a></p>
-    <p class="headline">{{ review.headline }}</p>
-    {% if review.rating == 1 %}
-        <p class="rating">★☆☆☆☆</p>
-    {% elif review.rating == 2 %}
-        <p class="rating">★★☆☆☆</p>
-    {% elif review.rating == 3 %}
-        <p class="rating">★★★☆☆</p>
-    {% elif review.rating == 4 %}
-        <p class="rating">★★★★☆</p>
-    {% elif review.rating == 5 %}
-        <p class="rating">★★★★★</p>
-    {% else %}
-        <p class="rating">☆☆☆☆☆</p>
-    {% endif %}
-    <div class="ticket_for_review">
-        <p class="user_ticket"><a href="{% url 'ticket_detail' review.ticket.id %}">Critique demandée par {% user_pronoun_choice review.ticket.user %}</a></p>
-        <p>{{ review.ticket.title }} - {{ review.ticket.author }}</p>
-        {% if review.ticket.image %}
-            <img src="{{ review.ticket.image.url }}">
-        {% else %}
-            <img src="{% static 'images/default_profile.png' %}">
-        {% endif %}
+<div class="px-5 py-2 container border border-2 border-secondary">
+    <div class="row py-1">
+        <p class="col fs-5 text-start">
+            <a class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="{% url 'review_detail' review.ticket.id review.id %}">
+                Critique proposée par {% user_pronoun_choice review.user %}
+            </a>
+        </p>
+        <p class="col text-end fw-light fst-italic">édité le {{ review.time_created }}</p>
+    </div>
+    <div class="row py-1">
+        <p class="col text-start">
+            {{ review.headline }} -
+            {% if review.rating == 1 %}
+                ★☆☆☆☆
+            {% elif review.rating == 2 %}
+                ★★☆☆☆
+            {% elif review.rating == 3 %}
+                ★★★☆☆
+            {% elif review.rating == 4 %}
+                ★★★★☆
+            {% elif review.rating == 5 %}
+                ★★★★★
+            {% else %}
+                ☆☆☆☆☆
+            {% endif %}
+        </p>
+    </div>
+    <div class="row py-1">
+        <p class="col text-start">{{ review.body }}</p>
+    </div>
+    <div class="row py-1">
+        <div class="px-5 py-2 container border border-2 border-secondary">
+            <div class="row py-1">
+                <p class="col fs-5 text-start">
+                    <a class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="{% url 'ticket_detail' review.ticket.id %}">
+                        Critique demandée par {% user_pronoun_choice review.ticket.user %}
+                    </a>
+                </p>
+                <p class="col text-end fw-light fst-italic">édité le {{ review.ticket.time_created }}</p>
+            </div>
+            <div class="row py-1">
+                <p class="col text-start">{{ review.ticket.title }} - {{ review.ticket.author }}</p>
+            </div>
+            <div class="row py-1">
+                {% if review.ticket.image %}
+                    <img class="col-2 text-start" src="{{ review.ticket.image.url }}">
+                {% endif %}
+            </div>
+        </div>
     </div>
 </div>
